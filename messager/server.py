@@ -4,8 +4,6 @@ import argparse
 import logging
 import configparser
 import logs.config_server_log
-
-from common.variables import *
 from common.utils import *
 from common.decos import log
 from server.core import MessageProcessor
@@ -20,7 +18,7 @@ logger = logging.getLogger('server_dist')
 
 @log
 def arg_parser(default_port, default_address):
-    """Парсер аргументов коммандной строки."""
+    '''Парсер аргументов коммандной строки.'''
     logger.debug(
         f'Инициализация парсера аргументов коммандной строки: {sys.argv}')
     parser = argparse.ArgumentParser()
@@ -37,7 +35,7 @@ def arg_parser(default_port, default_address):
 
 @log
 def config_load():
-    """Парсер конфигурационного ini файла."""
+    '''Парсер конфигурационного ini файла.'''
     config = configparser.ConfigParser()
     dir_path = os.path.dirname(os.path.realpath(__file__))
     config.read(f"{dir_path}/{'server_dist+++.ini'}")
@@ -82,14 +80,14 @@ def main():
         while True:
             command = input('Введите exit для завершения работы сервера.')
             if command == 'exit':
-                # Если выход, то завершаем основной цикл сервера.
+                # Если выход, то завршаем основной цикл сервера.
                 server.running = False
                 server.join()
                 break
 
     # Если не указан запуск без GUI, то запускаем GUI:
     else:
-        # Создаём графическое окружение для сервера:
+        # Создаём графическое окуружение для сервера:
         server_app = QApplication(sys.argv)
         server_app.setAttribute(Qt.AA_DisableWindowContextHelpButton)
         main_window = MainWindow(database, server, config)
