@@ -1,16 +1,17 @@
 import logging
 import sys
 
-
-if sys.argv[0].find('client') == -1:
-   
-    logger = logging.getLogger('server')
+# Инициализиция логера
+# метод определения модуля, источника запуска.
+if sys.argv[0].find('client_dist') == -1:
+    # если не клиент то сервер!
+    logger = logging.getLogger('server_dist')
 else:
-   
-    logger = logging.getLogger('client')
+    # ну, раз не сервер, то клиент
+    logger = logging.getLogger('client_dist')
 
 
-
+# Дескриптор для описания порта:
 class Port:
     def __set__(self, instance, value):
         if not 1023 < value < 65536:
